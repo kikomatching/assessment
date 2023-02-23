@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Store extends Model
 {
-    use HasFactory;
+    use Filterable, HasFactory;
 
     protected $fillable  = ['address', 'city', 'state', 'zip_code'];
 
@@ -36,5 +36,16 @@ class Store extends Model
     public function journals(): HasMany
     {
         return $this->hasMany(Journal::class);
+    }
+
+    /**
+     * Filter results by Owner.
+     *
+     * @param int $id
+     * @return Builder
+     */
+    public function filterByOwner(Builder $query, int $id): Builder
+    {
+        return $query->whereHas('user', fn(Builder $query) => $query->where('id', $id));
     }
 }
