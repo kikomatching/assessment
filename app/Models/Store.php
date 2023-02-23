@@ -46,6 +46,8 @@ class Store extends Model
      */
     public function filterByOwner(Builder $query, int $id): Builder
     {
-        return $query->whereHas('user', fn(Builder $query) => $query->where('id', $id));
+        return $query->whereHas('user', 
+            fn(Builder $query) => $query->where('id', $id)
+        );
     }
 }
