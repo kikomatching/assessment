@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::controller(UserController::class)->group(function() {
-    Route::get('me', 'show');
+    Route::get('me', 'show')->name('owners.me');
+});
+
+Route::controller(StoreController::class)->group(function() {
+    Route::get('stores', 'index')->name('stores.index');
 });
