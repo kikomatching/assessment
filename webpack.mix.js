@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js')
     ])
     .extract([
         'jquery'
-    ]);
+    ])
+    .js('resources/js/stores.js', 'public/js');

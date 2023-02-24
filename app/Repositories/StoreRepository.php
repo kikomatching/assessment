@@ -13,8 +13,11 @@ class StoreRepository extends Repository implements StoreRepositoryInterface
      */
     public function getAllByOwner(User $user): Collection
     {
-        return $this->model->filter([
-            'owner' => $user->id,
-        ])->get();
+        return $this->model->with('brand')
+                            ->withSum('journals', 'revenue')
+                            ->withSum('journals', 'profit')
+                            ->filter([
+                                'owner' => $user->id,
+                            ])->get();
     }
 }

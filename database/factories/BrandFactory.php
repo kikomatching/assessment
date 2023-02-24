@@ -15,7 +15,7 @@ class BrandFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'color' => $this->faker->hexColor(),
+            'color' => $this->faker->rgbColor(),
         ];
     }
 }

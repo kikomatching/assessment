@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 class Journal extends Model
 {
@@ -47,5 +48,60 @@ class Journal extends Model
         return $query->whereHas('store.user',
             fn($query) => $query->where('id', $id)
         );
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getDateAttribute($value)
+    {
+        return $value;
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRevenueAttribute($value)
+    {
+        return '$' . number_format($value, 2);
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getFoodCostAttribute($value)
+    {
+        return '$' . number_format($value, 2);
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getLaborCostAttribute($value)
+    {
+        return '$' . number_format($value, 2);
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getProfitAttribute($value)
+    {
+        return '$' . number_format($value, 2);
     }
 }

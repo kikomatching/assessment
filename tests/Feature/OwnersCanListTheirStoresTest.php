@@ -24,7 +24,7 @@ class OwnersCanListTheirStoresTest extends TestCase
 
         $this->actingAs($user);
 
-        $response = $this->json('GET', route('stores.index'));
+        $response = $this->json('GET', route('api.stores.index'));
 
         $response->assertJsonStructure([
             'data' => [

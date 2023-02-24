@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+ 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -49,5 +51,38 @@ class Store extends Model
         return $query->whereHas('user', 
             fn(Builder $query) => $query->where('id', $id)
         );
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getAddressAttribute($value)
+    {
+        return $value . ', ' . $this->city . ', ' . $this->state . ', ' . $this->zip_code;
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getJournalsSumRevenueAttribute($value)
+    {
+        return '$' . number_format($value, 2);
+    }
+
+    /**
+     * Get the store complete address.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getJournalsSumProfitAttribute($value)
+    {
+        return '$' . number_format($value, 2);
     }
 }
